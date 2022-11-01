@@ -5,9 +5,11 @@ const contactsPath = path.resolve("./db/contacts.json");
 
 async function listContacts() {
   try {
-    return JSON.parse(await fs.readFile(contactsPath, (err) => {
-      if (err) return err.message;
-    }));
+    return JSON.parse(
+      await fs.readFile(contactsPath, (err) => {
+        if (err) return err.message;
+      })
+    );
   } catch (error) {
     console.error(error.message);
   }
@@ -28,7 +30,7 @@ async function removeContact(contactId) {
     const updatedContacts = contacts.filter(
       ({ id }) => id !== contactId.toString()
     );
-    fs.writeFile(contactsPath, JSON.stringify(updatedContacts),, (err) => {
+    fs.writeFile(contactsPath, JSON.stringify(updatedContacts), (err) => {
       if (err) console.error(err);
     });
     return updatedContacts;
